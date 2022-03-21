@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
 
   socket.on("completar tarea", (tarea) => {
     const proyecto = tarea.proyecto;
-    socket.to(proyecto).emit("tarea completada", tarea);
+    socket.to(proyecto).emit("tarea completada", tarea, "tarea completada");
   });
 
   // socket.on("cambio tarea", () => {

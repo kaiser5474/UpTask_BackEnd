@@ -41,7 +41,7 @@ const readTarea = async (req, res) => {
 
 const updateTarea = async (req, res) => {
   const { id } = req.params;
-  const { nombre, descripcion, prioridad, estado } = req.body;
+  const { nombre, descripcion, prioridad, estado, fechaEntrega } = req.body;
   const tarea = await Tarea.findById(id).populate("proyecto");
 
   //Compruebo que exista la tarea
@@ -59,9 +59,11 @@ const updateTarea = async (req, res) => {
   tarea.descripcion = descripcion || tarea.descripcion;
   tarea.prioridad = prioridad || tarea.prioridad;
   tarea.estado = estado || tarea.estado;
+  tarea.fechaEntrega = fechaEntrega || tarea.fechaEntrega;
 
   try {
     tarea.depopulate("proyecto");
+    tarea.populate("completado");
     const tareaActualizada = await tarea.save();
     return res.json({ msg: "Tarea actualizada", tarea: tareaActualizada });
   } catch (error) {

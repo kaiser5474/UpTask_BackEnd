@@ -12,6 +12,11 @@ const tareaSchema = moongoose.Schema(
       trim: true,
       required: true,
     },
+     nota: {
+      type: String,
+      trim: true,
+      required: false,
+    },
     estado: {
       type: Boolean,
       default: false,

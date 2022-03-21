@@ -50,18 +50,18 @@ const io = new Server(servidor, {
 io.on("connection", (socket) => {
   console.log("Conectado a socket.io");
 
+  // let cambioTarea = false;
+
   socket.on("abrir proyecto", (proyecto) => {
     socket.join(proyecto);
   });
+  // socket.on("cerrar proyecto", (proyecto) => {
+  //   socket.leave(proyecto);
+  // });
 
   socket.on("nueva tarea", (tarea) => {
     const proyecto = tarea.proyecto;
-    socket.join(proyecto);
     socket.to(proyecto).emit("tarea agregada", tarea);
-  });
-
-  socket.on("cerrar proyecto", (proyecto) => {
-    socket.leave(proyecto);
   });
 
   socket.on("eliminar tarea", (tarea) => {
@@ -78,4 +78,8 @@ io.on("connection", (socket) => {
     const proyecto = tarea.proyecto;
     socket.to(proyecto).emit("tarea completada", tarea);
   });
+
+  // socket.on("cambio tarea", () => {
+  //   socket.to(proyecto).emit("tarea cambiada", cambioTarea);
+  // });
 });

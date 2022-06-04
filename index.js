@@ -11,7 +11,7 @@ app.use(express.json()); //esta linea permite leer el body del request
 dotenv.config();
 conectarDB();
 
-//Configurar CORS
+//Configurar CORS haciendo cambios
 const whiteList = [process.env.FRONTEND_URL];
 const corsOptions = {
   origin: function (origin, callback) {
